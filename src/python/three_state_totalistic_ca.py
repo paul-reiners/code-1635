@@ -93,7 +93,7 @@ class TotalisticCell1D:
             # Compute next generation state based on ruleset
             nextgen[i] = self.execute_rules(left, me, right)
 
-        return np.asarray(nextgen)
+        return np.asarray(nextgen, dtype=np.int8)
 
     # Implementing the Wolfram rules
     def execute_rules(self, a, b, c):
@@ -111,7 +111,7 @@ class TotalisticCell1D:
         """
         a = self.array[:, start:end]
         if fid:
-            np.savetxt(fid, a, delimiter=",")
+            np.savetxt(fid, a, delimiter=",", fmt='%1d', )
         else:
             for row in a:
                 print(row)
