@@ -73,7 +73,7 @@ class TotalisticCell1D:
         # First we create an empty array for the new values
         a = self.array
         i = self.next
-        c = self.generate(a[i-1])
+        c = self.generate(a[i - 1])
         a[i] = c
         self.next += 1
 
@@ -85,22 +85,21 @@ class TotalisticCell1D:
         # and neighbor states
         # Ignore edges that only have one neighor
         for i in range(1, len(cells) - 1):
-            left = cells[i - 1]     # Left neighbor state
-            me = cells[i]           # Current state
-            right = cells[i + 1]    # Right neighbor state
+            left = cells[i - 1]  # Left neighbor state
+            me = cells[i]  # Current state
+            right = cells[i + 1]  # Right neighbor state
             # Compute next generation state based on ruleset
-            nextgen[i] = self.executeRules(left, me, right)
+            nextgen[i] = self.execute_rules(left, me, right)
 
         return np.asarray(nextgen)
 
     # Implementing the Wolfram rules
-    def executeRules(self, a, b, c):
+    def execute_rules(self, a, b, c):
         total = a + b + c
         if 0 <= total <= 7:
             return self.table[7 - total - 1]
         else:
             return 0
-
 
     def print_ca(self, start=0, end=None):
         """Prints the CA.
@@ -126,7 +125,7 @@ def draw_ca(rule, n=32):
 
 
 def main():
-    draw_ca(rule=777, n=10)
+    draw_ca(rule=1635, n=10)
 
 
 if __name__ == "__main__":
