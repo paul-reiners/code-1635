@@ -11,8 +11,8 @@ from ThreeColorCA import ThreeColorCA   # Object to describe the Wolfram basic t
 
 def setup():
     global ca
-    size(640, 360)
-    ruleset = [1, 0, 0, 1, 2, 1, 0]  # An initial rule system
+    size(1280, 720)
+    ruleset = 1635  # An initial rule system
     ca = ThreeColorCA(ruleset)                    # Initialize CA
     background(0)
 

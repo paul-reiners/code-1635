@@ -1,16 +1,33 @@
 class ThreeColorCA:
-    rule_width = 7
-    
-    def __init__(self, r):
-        self.rules = r  # List that stores the ruleset, i.e. 0,1,1,0,1,1,0,1
+    def __init__(self, r_n):
+        self.rule_width = 7
+        r = self.convert_number_to_ruleset(r_n)
+        # self.convert_ruleset_to_number(r)
+        self.rules = r  # List that stores the ruleset,
         self.scl = 1    # How many pixels wide/high is each cell?
         self.cells = [0] * int(width / self.scl)
         self.restart()  # Sets self.generation to 0, only middle cell to 1
         
+    def convert_ruleset_to_number(self, rule_set):
+        print("rule_set:", rule_set)
+        rule_set.reverse()
+        number = rule_set[0]
+        for i in rule_set[1:]:
+            number += i
+            number *= 3
+        print("number: ", number)
+        return number
+        
     def convert_number_to_ruleset(self, number):
-        rule_set = [0] * rule_width
-        for i in range(rule_width):
-            pass
+        rule_set = [0] * self.rule_width
+        n = number
+        for i in range(self.rule_width):
+            rule_set[i] = n % 3
+            n = n // 3
+        rule_set.reverse()
+        print("number: ", number)
+        print("rule_set:", rule_set)
+        return rule_set
 
     # Set the rules of the CA
     def setRules(self, r):
@@ -20,6 +37,7 @@ class ThreeColorCA:
     def randomize(self):
         for i in range(7):
             self.rules[i] = int(random(3))
+        print('rule_set:', self.rules)
 
     # Reset to generation 0
     def restart(self):
@@ -57,11 +75,11 @@ class ThreeColorCA:
         for i in range(len(self.cells)):
             cell = self.cells[i]
             if (cell == 2):
-                fill(255)
+                fill(0)
             elif (cell == 1):
                 fill(127)
             else:
-                fill(0)
+                fill(255)
 
             noStroke()
             rect(i * scl, self.generation * scl, scl, scl)
