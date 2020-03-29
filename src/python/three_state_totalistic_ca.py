@@ -103,18 +103,21 @@ class TotalisticCell1D:
         else:
             return 0
 
-    def print_ca(self, start=0, end=None):
+    def print_ca(self, start=0, end=None, fid=None):
         """Prints the CA.
 
         start: index of the first column to be shown
         end: index of the last column to be shown
         """
         a = self.array[:, start:end]
-        for row in a:
-            print(row)
+        if fid:
+            np.savetxt(fid, a, delimiter=",")
+        else:
+            for row in a:
+                print(row)
 
 
-def draw_ca(rule_num, gen_count=32):
+def draw_ca(rule_num, gen_count=32, fid=None):
     """Makes and prints a 1D, three-state, totalistic CA with a given rule.
 
     rule: int rule number
@@ -123,14 +126,17 @@ def draw_ca(rule_num, gen_count=32):
     ca = TotalisticCell1D(rule_num, gen_count)
     ca.start_single()
     ca.loop(gen_count - 1)
-    ca.print_ca()
+    ca.print_ca(fid=fid)
 
 
-def main(rule_num=1635, gen_count=10):
-    draw_ca(rule_num, gen_count)
+def main(rule_num=1635, gen_count=10, fid=None):
+    draw_ca(rule_num, gen_count, fid)
 
 
 if __name__ == "__main__":
     rule = int(sys.argv[1])
     n = int(sys.argv[2])
-    main(rule, n)
+    path = None
+    if len(sys.argv) > 3:
+        path = sys.argv[3]
+    main(rule, n, path)
