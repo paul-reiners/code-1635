@@ -1,12 +1,14 @@
 # Author:
 # Adapted from code in Think Complexity, 2nd Edition, by by Allen Downey
 
+import sys
+
 import numpy as np
 
 rule_width = 7
 
 
-def make_table(rule):
+def make_table(rule_num):
     """Make the table for a given CA rule.
 
     rule: int 0-2186
@@ -14,12 +16,12 @@ def make_table(rule):
     returns: array of 7 0s, 1s, and 2s
     """
     rule_set = [0] * rule_width
-    n = rule
+    num = rule_num
     for i in range(rule_width):
-        rule_set[i] = n % 3
-        n = n // 3
+        rule_set[i] = num % 3
+        num = num // 3
     rule_set.reverse()
-    print("number: ", rule)
+    print("number: ", rule_num)
     print("rule_set:", rule_set)
     return rule_set
 
@@ -27,7 +29,7 @@ def make_table(rule):
 class TotalisticCell1D:
     """Represents a 1-D, three-state, totalistic cellular automaton"""
 
-    def __init__(self, rule, n, m=None):
+    def __init__(self, rule_num, gen_count, m=None):
         """Initializes the CA.
 
         rule: integer
@@ -40,11 +42,11 @@ class TotalisticCell1D:
         next:   the index of the next empty row.
         """
         self.rule_width = 7
-        self.table = make_table(rule)
-        self.n = n
-        self.m = 2 * n + 1 if m is None else m
+        self.table = make_table(rule_num)
+        self.n = gen_count
+        self.m = 2 * gen_count + 1 if m is None else m
 
-        self.array = np.zeros((n, self.m), dtype=np.int8)
+        self.array = np.zeros((gen_count, self.m), dtype=np.int8)
         self.next = 0
 
     def start_single(self):
@@ -112,21 +114,23 @@ class TotalisticCell1D:
             print(row)
 
 
-def draw_ca(rule, n=32):
+def draw_ca(rule_num, gen_count=32):
     """Makes and prints a 1D, three-state, totalistic CA with a given rule.
 
     rule: int rule number
     n: number of rows
     """
-    ca = TotalisticCell1D(rule, n)
+    ca = TotalisticCell1D(rule_num, gen_count)
     ca.start_single()
-    ca.loop(n - 1)
+    ca.loop(gen_count - 1)
     ca.print_ca()
 
 
-def main():
-    draw_ca(rule=1635, n=10)
+def main(rule_num=1635, gen_count=10):
+    draw_ca(rule_num, gen_count)
 
 
 if __name__ == "__main__":
-    main()
+    rule = int(sys.argv[1])
+    n = int(sys.argv[2])
+    main(rule, n)
