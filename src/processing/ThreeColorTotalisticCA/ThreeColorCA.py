@@ -2,21 +2,10 @@ class ThreeColorCA:
     def __init__(self, r_n):
         self.rule_width = 7
         r = self.convert_number_to_ruleset(r_n)
-        # self.convert_ruleset_to_number(r)
         self.rules = r  # List that stores the ruleset,
         self.scl = 1    # How many pixels wide/high is each cell?
         self.cells = [0] * int(width / self.scl)
         self.restart()  # Sets self.generation to 0, only middle cell to 1
-        
-    def convert_ruleset_to_number(self, rule_set):
-        print("rule_set:", rule_set)
-        rule_set.reverse()
-        number = rule_set[0]
-        for i in rule_set[1:]:
-            number += i
-            number *= 3
-        print("number: ", number)
-        return number
         
     def convert_number_to_ruleset(self, number):
         rule_set = [0] * self.rule_width
