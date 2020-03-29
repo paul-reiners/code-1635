@@ -111,7 +111,7 @@ class TotalisticCell1D:
         """
         a = self.array[:, start:end]
         if fid:
-            np.savetxt(fid, a, delimiter=",", fmt='%1d', )
+            np.savetxt(fid, a, delimiter=" ", fmt='%1d', )
         else:
             for row in a:
                 print(row)
