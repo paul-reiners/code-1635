@@ -134,9 +134,7 @@ def main(rule_num=1635, gen_count=10, fid=None):
 
 
 if __name__ == "__main__":
-    rule = int(sys.argv[1])
-    n = int(sys.argv[2])
-    path = None
-    if len(sys.argv) > 3:
-        path = sys.argv[3]
+    rule = 1635
+    n = int(sys.argv[1])
+    path = "out/{}_{}.txt".format(rule, n)
     main(rule, n, path)
