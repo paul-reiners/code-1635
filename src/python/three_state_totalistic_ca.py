@@ -130,8 +130,8 @@ def draw_ca(rule_num, gen_count=32, fid=None):
 
 
 def write_ca(gen_count=16):
-    fid = "out/{}_{}.txt".format(rule, gen_count)
     rule_num = 1635
+    fid = "out/{}_{}.txt".format(rule_num, gen_count)
     draw_ca(rule_num, gen_count, fid)
 
 
