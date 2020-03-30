@@ -129,7 +129,9 @@ def draw_ca(rule_num, gen_count=32, fid=None):
     ca.print_ca(fid=fid)
 
 
-def main(rule_num=1635, gen_count=10, fid=None):
+def write_ca(gen_count=16):
+    fid = "out/{}_{}.txt".format(rule, gen_count)
+    rule_num = 1635
     draw_ca(rule_num, gen_count, fid)
 
 
@@ -137,4 +139,4 @@ if __name__ == "__main__":
     rule = 1635
     n = int(sys.argv[1])
     path = "out/{}_{}.txt".format(rule, n)
-    main(rule, n, path)
+    write_ca(n)

@@ -30,6 +30,8 @@ def main(in_file_path, out_file_path):
 
 
 if __name__ == "__main__":
-    input_file_path = sys.argv[1]
-    output_file_path = sys.argv[2]
+    rule = 1635
+    n = sys.argv[1]
+    input_file_path = "out/{}_{}.txt".format(rule, n)
+    output_file_path = "out/{}_{}_compression.txt".format(rule, n)
     main(input_file_path, output_file_path)
