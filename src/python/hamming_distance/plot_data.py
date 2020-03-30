@@ -5,7 +5,7 @@ import sys
 
 def plot_data(generation_count):
     rule = 1635
-    input_file_path = "out/{}_{}_hamming-distance.txt".format(rule, generation_count)
+    input_file_path = "out/hamming-distance/{}_{}_hamming-distance.txt".format(rule, generation_count)
     df = pd.read_csv(input_file_path)
     print(df)
     df.plot(kind='scatter', x='generation', y='hamming-distance-from-prev-gen', color='red')
