@@ -83,30 +83,6 @@ class TotalisticCell1D:
         a[i] = next_row
         self.next += 1
 
-    # The process of creating the new generation
-    def generate(self, cells):
-        # First we create an empty array for the new values
-        nextgen = [0] * len(cells)
-        # For every spot, determine new state by examing current state,
-        # and neighbor states
-        # Ignore edges that only have one neighor
-        for i in range(1, len(cells) - 1):
-            left = cells[i - 1]  # Left neighbor state
-            me = cells[i]  # Current state
-            right = cells[i + 1]  # Right neighbor state
-            # Compute next generation state based on ruleset
-            nextgen[i] = self.execute_rules(left, me, right)
-
-        return np.asarray(nextgen, dtype=np.int8)
-
-    # Implementing the Wolfram rules
-    def execute_rules(self, a, b, c):
-        total = a + b + c
-        if 0 <= total <= 7:
-            return self.table[7 - total - 1]
-        else:
-            return 0
-
     def print_ca(self, start=0, end=None, fid=None):
         """Prints the CA.
 
