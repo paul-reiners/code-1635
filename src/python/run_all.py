@@ -1,7 +1,7 @@
 import sys
 
-from create_compression_data import create_data
-from plot_compression_data import plot_data
+from compression.create_data import create_data
+from compression.plot_data import plot_data
 from three_state_totalistic_ca import write_ca
 
 

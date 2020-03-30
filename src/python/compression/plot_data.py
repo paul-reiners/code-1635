@@ -9,6 +9,7 @@ def plot_data(generation_count):
     df = pd.read_csv(input_file_path)
     print(df)
     df.plot(kind='scatter', x='generation', y='compression-ratio', color='red')
+    plt.savefig('img/{}_{}_compression.png'.format(rule, generation_count))
     plt.show()
 
 
