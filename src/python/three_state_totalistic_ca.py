@@ -68,6 +68,8 @@ class TotalisticCell1D:
     def loop(self, steps=1):
         """Executes the given number of time steps."""
         for i in range(steps):
+            if i % 1024 == 0:
+                print("step {} of {}".format(i, self.n))
             self.step()
 
     def step(self):
@@ -131,7 +133,7 @@ def draw_ca(rule_num, gen_count=32, fid=None):
 
 def write_ca(gen_count=16):
     rule_num = 1635
-    fid = "out/{}_{}.txt".format(rule_num, gen_count)
+    fid = "out/ca/{}_{}.txt".format(rule_num, gen_count)
     draw_ca(rule_num, gen_count, fid)
 
 
