@@ -12,24 +12,30 @@ def hamming_distance(s1, s2):
 
 def create_data(generation_count):
     rule = 1635
-    in_file_path = "out/{}_{}.txt".format(rule, generation_count)
-    out_file_path = "out/{}_{}_compression.txt".format(rule, generation_count)
+    in_file_path = "out/ca/{}_{}.txt".format(rule, generation_count)
+    out_file_path = "out/hamming-distance/{}_{}_hamming-distance.txt".format(rule, generation_count)
     in_file = open(in_file_path, 'r')
     out_file = open(out_file_path, "w")
-    out_file.write("generation,width,compressed-width,compression-ratio\n")
+    out_file.write("generation,hamming-distance-from-prev-gen\n")
     count = 0
 
-    prev_line = None
+    prev_line = in_file.readline().strip()
+    width = len(prev_line)
+    mid_point = (width - 1) // 2
     while True:
         cur_line = in_file.readline().strip()
         if not cur_line or len(cur_line) == 0:
             break
 
-        if prev_line is not None:
-            d = hamming_distance(prev_line, cur_line)
-            print("{}, {}".format(count, d))
-            out_file.write("{},{}".format(count, d))
-            out_file.write("\n")
+        # Each generation on RHS moves to right one cell.
+        prev_gen_growth = prev_line[mid_point:mid_point + count + 1]
+        cur_gen_growth = cur_line[mid_point + 1: mid_point + count + 2]
+        d = hamming_distance(prev_gen_growth, cur_gen_growth)
+
+        print("{}, {}".format(count, d))
+        out_file.write("{},{}".format(count, d))
+        out_file.write("\n")
+
         prev_line = cur_line
         count += 1
 
