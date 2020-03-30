@@ -5,8 +5,8 @@ from zlib import compress
 
 def create_data(generation_count):
     rule = 1635
-    in_file_path = "out/{}_{}.txt".format(rule, generation_count)
-    out_file_path = "out/{}_{}_compression.txt".format(rule, generation_count)
+    in_file_path = "out/ca/{}_{}.txt".format(rule, generation_count)
+    out_file_path = "out/compression/{}_{}_compression.txt".format(rule, generation_count)
     in_file = open(in_file_path, 'r')
     out_file = open(out_file_path, "w")
     out_file.write("generation,width,compressed-width,compression-ratio\n")
