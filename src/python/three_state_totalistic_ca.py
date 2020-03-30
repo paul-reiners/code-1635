@@ -74,11 +74,13 @@ class TotalisticCell1D:
 
     def step(self):
         """Executes one time step by computing the next row of the array."""
-        # First we create an empty array for the new values
         a = self.array
         i = self.next
-        c = self.generate(a[i - 1])
-        a[i] = c
+        window = [1, 1, 1]
+        row = self.array[i - 1]
+        correlated_row = np.correlate(row, window, mode="same")
+        next_row = np.array([self.table[7 - total - 1] for total in correlated_row])
+        a[i] = next_row
         self.next += 1
 
     # The process of creating the new generation
