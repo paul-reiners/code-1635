@@ -23,4 +23,4 @@ def draw():
 def mousePressed():
     background(0)
     ca.randomize()
-    ca.restart()
+    ca.restart(True)

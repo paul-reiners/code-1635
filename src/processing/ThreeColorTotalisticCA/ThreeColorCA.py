@@ -5,7 +5,7 @@ class ThreeColorCA:
         self.rules = r  # List that stores the ruleset,
         self.scl = 1  # How many pixels wide/high is each cell?
         self.cells = [0] * int(width / self.scl)
-        self.restart()  # Sets self.generation to 0, only middle cell to 1
+        self.restart(False)  # Sets self.generation to 0, only middle cell to 1
 
     def convert_number_to_ruleset(self, number):
         rule_set = [0] * self.rule_width
@@ -29,12 +29,17 @@ class ThreeColorCA:
         print('rule_set:', self.rules)
 
     # Reset to generation 0
-    def restart(self):
+    def restart(self, random_initial_conditions):
         for i in range(len(self.cells)):
             self.cells[i] = 0
 
-        # We arbitrarily start with just the middle cell having a state of "1"
-        self.cells[len(self.cells) / 2] = 1
+        if not random_initial_conditions:
+            # We arbitrarily start with just the middle cell having a state of "1"
+            self.cells[len(self.cells) / 2] = 1
+        else:
+            seed = int(random(3.0))
+            print('seed:', seed)
+            self.cells[len(self.cells) / 2] = seed
         self.generation = 0
 
     # The process of creating the new generation
