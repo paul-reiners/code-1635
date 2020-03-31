@@ -5,7 +5,7 @@ import sys
 
 def plot_data(generation_count):
     rule = 1635
-    input_file_path = "out/{}_{}_compression.txt".format(rule, generation_count)
+    input_file_path = "out/compression/{}_{}_compression.txt".format(rule, generation_count)
     df = pd.read_csv(input_file_path)
     print(df)
     df.plot(kind='scatter', x='generation', y='compression-ratio', color='red')
