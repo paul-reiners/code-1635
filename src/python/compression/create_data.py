@@ -3,10 +3,14 @@ import sys
 from zlib import compress
 
 
-def create_data(generation_count, only_measure_within_light_come=True):
+def create_data(generation_count, only_measure_within_light_come=True, seed=None):
     rule = 1635
-    in_file_path = "out/ca/{}_{:05d}.txt".format(rule, generation_count)
-    out_file_path = "out/compression/{}_{:05d}_compression.txt".format(rule, generation_count)
+    if seed is None:
+        in_file_path = "out/ca/{}_{:05d}.txt".format(rule, generation_count)
+        out_file_path = "out/compression/{}_{:05d}_compression.txt".format(rule, generation_count)
+    else:
+        in_file_path = "out/ca/{}_{:05d}_{}.txt".format(rule, generation_count, seed)
+        out_file_path = "out/compression/{}_{:05d}_{}_compression.txt".format(rule, generation_count, seed)
     in_file = open(in_file_path, 'r')
     out_file = open(out_file_path, "w")
     out_file.write("generation,width,compressed-width,compression-ratio\n")
@@ -49,4 +53,7 @@ def peek_line(f):
 
 if __name__ == "__main__":
     n = int(sys.argv[1])
-    create_data(n)
+    if len(sys.argv) == 2:
+        create_data(n)
+    else:
+        create_data(n, seed=sys.argv[2])
